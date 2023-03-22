@@ -10,7 +10,7 @@ const $drawCardBtn = $("#draw-card-btn");
 
 function drawCard() {
 
-    const drawCardPromise = axios.get(`${baseUrl}/${deckId}/draw/?count=52`);
+    const drawCardPromise = axios.get(`${baseUrl}/${deckId}/draw/?count=1`);
     drawCardPromise
         .then((data) => {
             if (data.data.remaining === 0) {
