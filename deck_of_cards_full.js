@@ -3,3 +3,43 @@
 
 
 const baseUrl = "https://deckofcardsapi.com/api/deck";
+let deckId;
+
+const $drawCardBtn = $("#draw-card-btn");
+
+
+function drawCard() {
+
+    const drawCardPromise = axios.get(`${baseUrl}/${deckId}/draw/?count=52`);
+    drawCardPromise
+        .then((data) => {
+            if (data.data.remaining === 0) {
+                $drawCardBtn.hide();
+            }
+
+            card = data.data.cards[0];
+            console.log(`${card.value} of ${card.suit}`);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+}
+
+
+$(function () {
+    console.log("DOM is loaded.");
+
+    // Create new deck and get a deck ID
+    shuffledDeckPromise = axios.get(`${baseUrl}/new/shuffle`);
+
+    shuffledDeckPromise
+        .then((data) => {
+            deckId = data.data.deck_id;
+
+            // Attach event handler to draw-card button
+            $drawCardBtn.on("click", drawCard);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+});
