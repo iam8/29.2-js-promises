@@ -18,7 +18,8 @@ function drawCard() {
             }
 
             card = data.data.cards[0];
-            console.log(`${card.value} of ${card.suit}`);
+            $("#card-display").append(`<image class="card-img" src=${card.image}>`)
+
         })
         .catch((error) => {
             console.log(error);
