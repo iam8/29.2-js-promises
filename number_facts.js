@@ -1,12 +1,15 @@
 // Ioana A Mititean
 // 29.2 - JS Promises
 
-let number_trivia;
 
-$.getJSON("http://numbersapi.com/42?json", (response) => {
-        number_trivia = response;
-        console.log("done", number_trivia)
-    }
-);
+// Part 1-1
+let baseUrl = "http://numbersapi.com";
+let targetNum = 7;
 
-console.log("Waiting");
+let numberTriviaPromise = axios.get(`${baseUrl}/${targetNum}?json`);
+
+numberTriviaPromise
+    .then((data) => {
+        $("#fav-num-fact").text(data.data.text);
+    })
+    .catch((error) => console.log(error))
