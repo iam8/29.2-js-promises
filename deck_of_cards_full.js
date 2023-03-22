@@ -2,10 +2,30 @@
 // 29.2 - JS Promises
 
 
+// Part 2-3
+
 const baseUrl = "https://deckofcardsapi.com/api/deck";
 let deckId;
 
 const $drawCardBtn = $("#draw-card-btn");
+
+
+function initializeDeck() {
+
+    // Create new deck and get a deck ID
+    shuffledDeckPromise = axios.get(`${baseUrl}/new/shuffle`);
+
+    shuffledDeckPromise
+        .then((data) => {
+            deckId = data.data.deck_id;
+
+            // Attach event handler to draw-card button
+            $drawCardBtn.on("click", drawCard);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
 
 
 function drawCard() {
@@ -30,17 +50,5 @@ function drawCard() {
 $(function () {
     console.log("DOM is loaded.");
 
-    // Create new deck and get a deck ID
-    shuffledDeckPromise = axios.get(`${baseUrl}/new/shuffle`);
-
-    shuffledDeckPromise
-        .then((data) => {
-            deckId = data.data.deck_id;
-
-            // Attach event handler to draw-card button
-            $drawCardBtn.on("click", drawCard);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+    initializeDeck();
 });
