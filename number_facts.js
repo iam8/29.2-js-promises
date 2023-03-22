@@ -2,14 +2,27 @@
 // 29.2 - JS Promises
 
 
-// Part 1-1
 let baseUrl = "http://numbersapi.com";
-let targetNum = 7;
+let favNum = 7;
 
-let numberTriviaPromise = axios.get(`${baseUrl}/${targetNum}?json`);
+// Part 1-1
+let favNumPromise = axios.get(`${baseUrl}/${favNum}?json`);
 
-numberTriviaPromise
+favNumPromise
     .then((data) => {
         $("#fav-num-fact").text(data.data.text);
     })
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error));
+
+
+// Part 1-2
+let manyNumsPromise = axios.get(`${baseUrl}/0..10`);
+
+manyNumsPromise
+    .then((data) => {
+        for (let num in data.data) {
+            let $factLi = $(`<li>${data.data[num]}</li>`);
+            $("#multiple-req-list").append($factLi);
+        }
+    })
+    .catch((error) => console.log(error));
