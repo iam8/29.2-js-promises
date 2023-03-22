@@ -2,7 +2,7 @@
 // 29.2 - JS Promises
 
 
-let baseUrl = "https://deckofcardsapi.com/api/deck";
+const baseUrl = "https://deckofcardsapi.com/api/deck";
 
 // Part 2-1
 const singleCardPromise = axios.get(`${baseUrl}/new/draw/?count=1`);
