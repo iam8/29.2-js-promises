@@ -26,3 +26,21 @@ manyNumsPromise
         }
     })
     .catch((error) => console.log(error));
+
+
+// Part 1-3
+let favNumManyPromise = axios.get(`${baseUrl}/${favNum}?json`);
+
+let appendFact = (data) => {
+    let $factLi = $(`<li>${data.data.text}</li>`);
+    $("#fav-num-facts-list").append($factLi);
+
+    return axios.get(`${baseUrl}/${favNum}?json`);
+}
+
+favNumManyPromise
+    .then(appendFact)
+    .then(appendFact)
+    .then(appendFact)
+    .then(appendFact)
+    .catch((error) => console.log(error));
