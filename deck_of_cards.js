@@ -41,3 +41,6 @@ firstCardPromise
     .catch((error) => {
         console.log(error);
     });
+
+
+// Part 2-3: See file 'deck_of_cards_full.js'
